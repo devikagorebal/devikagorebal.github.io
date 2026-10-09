@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G Devika | Full Stack Developer & AI Enthusiast</title>
+  <meta name="description" content="Portfolio of G Devika - Full Stack Developer specializing in Python, Django, modern web technologies, and Machine Learning.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- Interactive Canvas Background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Ambient Glow Blobs -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+
+  <!-- Custom Cursor Followers -->
+  <div class="custom-cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="custom-cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+  <!-- Confetti Canvas for Celebrations -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Floating Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar" id="navbar">
+      <a href="#hero" class="nav-logo" aria-label="Devika Home">
+        <span class="logo-bracket">&lt;</span>
+        <span class="logo-name">Devika</span>
+        <span class="logo-tag">.dev</span>
+        <span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <!-- <a href="#cinnamon" class="nav-link">ML Lab</a> -->
+        <!-- <a href="#nova" class="nav-link">Mini Nova</a> -->
+        <a href="#journey" class="nav-link">Journey</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Audio Synth FX Toggle -->
+        <button id="soundToggle" class="icon-btn" title="Toggle audio feedback" aria-label="Toggle audio effects">
+          <svg class="icon icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+          <svg class="icon icon-sound-off hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="themeToggle" class="icon-btn" title="Toggle dark/light mode" aria-label="Toggle theme">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon icon-moon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Hamburger -->
+        <button id="mobileMenuBtn" class="icon-btn mobile-only" aria-label="Toggle navigation menu">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+
+        <a href="#contact" class="btn btn-sm btn-primary nav-cta">Let's Talk</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-container">
+        <div class="hero-content">
+          <!-- Availability Badge -->
+          <div class="status-pill animate-fade-in">
+            <span class="status-dot"></span>
+            <span class="status-text">Available for entry-level Full Stack roles</span>
+            <span class="location-tag">📍 Bengaluru, India</span>
+          </div>
+
+          <!-- Main Greeting -->
+          <h1 class="hero-title animate-slide-up">
+            Hi, I'm <span class="gradient-text">G Devika</span>
+          </h1>
+
+          <!-- Dynamic Typing Line -->
+          <div class="hero-typing-wrap animate-slide-up delay-1">
+            <span class="typing-prefix">A passionate </span>
+            <span class="typing-text" id="typing"></span>
+            <span class="typing-caret" aria-hidden="true">|</span>
+          </div>
+
+          <!-- Description -->
+          <p class="hero-description animate-slide-up delay-2">
+            2026 Computer Science graduate building seamless, high-performance web applications from end to end — from robust Python &amp; Django backends and relational databases to elegant, responsive user interfaces.
+          </p>
+
+          <!-- Action Buttons -->
+          <div class="hero-cta-group animate-slide-up delay-3">
+            <a href="#projects" class="btn btn-primary magnetic-btn">
+              <span>Explore My Work</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </a>
+            <a href="#cinnamon" class="btn btn-secondary magnetic-btn">
+              <span class="btn-sparkle">✨</span>
+              <span>Try ML Simulator</span>
+            </a>
+            <a href="#contact" class="btn btn-ghost magnetic-btn">
+              <span>Contact Me</span>
+            </a>
+          </div>
+
+          <!-- Social Quick Links -->
+          <div class="hero-socials animate-slide-up delay-4">
+            <a href="https://linkedin.com/in/g-devika-36488130a" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn Profile">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/devikagorebal" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub Profile">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <button class="social-link copy-email-btn" data-email="devikagorebalc@gmail.com" title="Copy Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Email</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Hero Interactive Code Playground Window -->
+        <div class="hero-visual animate-slide-left">
+          <div class="code-window glass-card">
+            <div class="code-header">
+              <div class="window-controls">
+                <span class="control-dot close"></span>
+                <span class="control-dot min"></span>
+                <span class="control-dot max"></span>
+              </div>
+              <div class="window-title">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span>devika.py</span>
+              </div>
+              <button class="run-code-btn" id="runCodeBtn" title="Run Python code">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                <span>Run</span>
+              </button>
+            </div>
+            <pre class="code-body"><code><span class="kw">class</span> <span class="cls">Developer</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>):
+        <span class="var">self</span>.name = <span class="str">"G Devika"</span>
+        <span class="var">self</span>.education = <span class="str">"BE CSE (2026)"</span>
+        <span class="var">self</span>.cgpa = <span class="num">8.66</span>
+        <span class="var">self</span>.role = <span class="str">"Full Stack Developer"</span>
+        <span class="var">self</span>.core_stack = [<span class="str">"Python"</span>, <span class="str">"Django"</span>, <span class="str">"SQL"</span>, <span class="str">"React"</span>]
+        <span class="var">self</span>.passion = <span class="str">"Building end-to-end intelligent web apps"</span>
+
+    <span class="kw">def</span> <span class="fn">ready_to_hire</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="var">True</span>
+
+devika = <span class="cls">Developer</span>()
+<span class="fn">print</span>(f<span class="str">"🚀 {devika.name} is ready for new challenges!"</span>)</code></pre>
+            <div class="code-terminal-output" id="terminalOutput">
+              <span class="output-prompt">&gt; Output:</span>
+              <span class="output-text" id="outputText">Click 'Run' to execute devika.py...</span>
+            </div>
+          </div>
+
+          <!-- Floating Decorative Tech Pills -->
+          <div class="floating-pill pill-python" aria-hidden="true">
+            <span>🐍 Python &amp; Django</span>
+          <!-- <div class="floating-pill pill-cgpa" aria-hidden="true">
+            <span>🎓 8.66 CGPA</span>
+          </div> -->
+        </div>
+      </div>
+
+      <!-- Scroll Down Indicator -->
+      <a href="#about" class="scroll-down-indicator" aria-label="Scroll to About section">
+        <span class="mouse-wheel"></span>
+        <span class="scroll-arrow"></span>
+      </a>
+    </section>
+
+    <!-- ABOUT & BENTO METRICS -->
+    <section id="about" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Overview</span>
+        <h2 class="section-title">About Me &amp; Impact</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">A blend of computer science foundations, full-stack engineering, and hands-on ML exploration.</p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Main Story Card -->
+        <div class="bento-card bento-story glass-card">
+          <div class="bento-badge">Background &amp; Philosophy</div>
+          <h3>Crafting systems from the database to the browser</h3>
+          <p>
+            I am a 2026 Computer Science Engineering graduate from <strong>Sampoorna Institute of Technology and Research</strong> with an <strong>8.66 CGPA</strong>. I genuinely love building complete, resilient web applications: architecting the database schema, writing clean and modular Python/Django APIs, and delivering crisp, intuitive interfaces.
+          </p>
+          <p>
+            With formal training from <strong>Destination Career</strong> and hands-on internship experience developing an end-to-end Machine Learning quality classification application, I bring strong problem-solving skills, solid Object-Oriented Programming principles, and an eager appetite to learn and deliver impact.
+          </p>
+          <div class="story-tags">
+            <span class="tag">🚀 2026 Graduate</span>
+            <span class="tag">💼 Full Stack Intern</span>
+            <span class="tag">💡 Fast Problem Solver</span>
+            <span class="tag">📍 Bengaluru</span>
+          </div>
+        </div>
+
+        <!-- Metric 1: CGPA -->
+        <div class="bento-card bento-metric glass-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+            </svg>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-num counter" data-target="8.66" data-decimals="2">0.00</span>
+          </div>
+          <div class="metric-label">Engineering CGPA</div>
+          <p class="metric-desc">Sampoorna SITR (Dec 2022 – May 2026)</p>
+        </div>
+
+        <!-- Metric 2: Core Projects -->
+      <div class="bento-card bento-metric glass-card">
+  <div class="metric-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+      <polyline points="2 17 12 22 22 17"></polyline>
+      <polyline points="2 12 12 17 22 12"></polyline>
+    </svg>
+  </div>
+
+  <div class="metric-number-wrap">
+    <span class="metric-num counter" data-target="1" data-decimals="0">0</span>
+    <span class="metric-suffix">+</span>
+  </div>
+
+  <div class="metric-label">Internship</div>
+
+  <p class="metric-desc">
+    Python &amp; Machine learning
+  </p>
+</div>
+
+
+        <!-- Metric 4: Nova Building Time -->
+        <div class="bento-card bento-metric glass-card">
+          <div class="metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-num counter" data-target="4" data-decimals="0">0</span>
+            <span class="metric-suffix">Months</span>
+          </div>
+          <div class="metric-label">Internship experience</div>
+          <p class="metric-desc">Python &amp; Machine learning</p>
+        </div>
+
+        <!-- Metric 5: Core Domains -->
+        <div class="bento-card bento-metric glass-card core-domain-card">
+          <div class="metric-icon core-domain-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 4h6a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z"></path>
+              <path d="m8 9 4-2 4 2M8 15l4 2 4-2"></path>
+            </svg>
+          </div>
+          <div class="metric-number-wrap">
+            <span class="metric-num counter" data-target="2" data-decimals="0">0</span>
+            <span class="metric-suffix">Domains</span>
+          </div>
+          <div class="metric-label">Core expertise</div>
+          <p class="metric-desc">AI/ML &amp; Web development</p>
+        </div>
+      </div>
+    </section>
+    <!-- SKILLS MATRIX -->
+    <section id="skills" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Competencies</span>
+        <h2 class="section-title">Technical Skills &amp; Stack</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">Technologies and methodologies I use to turn design and ideas into working software.</p>
+      </div>
+
+      <!-- Skill Category Filter Tabs -->
+      <div class="skills-filter-tabs">
+        <button class="skill-tab active" data-filter="all">All Skills</button>
+        <button class="skill-tab" data-filter="backend">Backend &amp; Architecture</button>
+        <button class="skill-tab" data-filter="frontend">Frontend &amp; UI</button>
+        <button class="skill-tab" data-filter="database">Databases &amp; Tools</button>
+      </div>
+
+      <!-- Skills Grid with Interactive Cards -->
+      <div class="skills-grid" id="skillsGrid">
+        <!-- Python -->
+        <div class="skill-card glass-card" data-category="backend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-python">
+              <span>🐍</span>
+            </div>
+            <div class="skill-meta">
+              <h3>Python</h3>
+              <span class="skill-category-label">Core Language</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 90%;"></div>
+          </div> -->
+          <p class="skill-note">Data structures, scripting, algorithm design &amp; OOP implementation.</p>
+        </div>
+
+        <!-- OOP -->
+        <div class="skill-card glass-card" data-category="backend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-oop">
+              <span>📐</span>
+            </div>
+            <div class="skill-meta">
+              <h3>OOP Concepts</h3>
+              <span class="skill-category-label">Software Design</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 85%;"></div>
+          </div> -->
+          <p class="skill-note">Encapsulation, inheritance, polymorphism, modular system design.</p>
+        </div>
+
+        <!-- HTML5 & CSS3 -->
+        <div class="skill-card glass-card" data-category="frontend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-html">
+              <span>🎨</span>
+            </div>
+            <div class="skill-meta">
+              <h3>HTML5 &amp; CSS3</h3>
+              <span class="skill-category-label">Frontend Styling</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 80%;"></div>
+          </div> -->
+          <p class="skill-note">Semantic HTML, Flexbox, CSS Grid, animations &amp; responsive layouts.</p>
+        </div>
+
+        <!-- SQL / Databases -->
+        <div class="skill-card glass-card" data-category="database">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-sql">
+              <span>🗄️</span>
+            </div>
+            <div class="skill-meta">
+              <h3>SQL (MySQL, Oracle)</h3>
+              <span class="skill-category-label">Relational DB</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 75%;"></div>
+          </div> -->
+          <p class="skill-note">Complex joins, subqueries, normalization, schema modeling &amp; optimization.</p>
+        </div>
+
+        <!-- Django -->
+        <div class="skill-card glass-card" data-category="backend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-django">
+              <span>⚡</span>
+            </div>
+            <div class="skill-meta">
+              <h3>Django</h3>
+              <span class="skill-category-label">Python Web Framework</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 70%;"></div>
+          </div> -->
+          <p class="skill-note">MVT architecture, ORM queries, Django Auth, template tags &amp; views.</p>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="skill-card glass-card" data-category="frontend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-js">
+              <span>⚡</span>
+            </div>
+            <div class="skill-meta">
+              <h3>JavaScript (ES6+)</h3>
+              <span class="skill-category-label">Frontend Logic</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 65%;"></div>
+          </div> -->
+          <p class="skill-note">DOM manipulation, Fetch API, asynchronous JS (async/await), event listeners.</p>
+        </div>
+
+        <!-- React.js -->
+        <div class="skill-card glass-card" data-category="frontend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-react">
+              <span>⚛️</span>
+            </div>
+            <div class="skill-meta">
+              <h3>React.js</h3>
+              <span class="skill-category-label">Component Library</span>
+            </div>
+          </div>
+          <!-- <div class="skill-bar-track">
+            <div class="skill-bar-fill" style="--width: 65%;"></div>
+          </div> -->
+          <p class="skill-note">Component lifecycle, hooks (useState, useEffect), props, responsive UI.</p>
+        </div>
+
+
+
+
+
+        <!-- Bootstrap -->
+        <div class="skill-card glass-card" data-category="frontend">
+          <div class="skill-card-top">
+            <div class="skill-icon-wrap icon-bootstrap">
+              <span>◈</span>
+            </div>
+            <div class="skill-meta">
+              <h3>Bootstrap</h3>
+              <span class="skill-category-label">UI Framework</span>
+            </div>
+          </div>
+          <p class="skill-note">Responsive grids, reusable components, utility classes, and polished front-end interfaces.</p>
+        </div>
+    </section>
+
+
+    
+
+    <!-- FEATURED PROJECTS -->
+    <section id="projects" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Portfolio</span>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">Full-stack applications tackling real-world classification and intelligent automation.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 Card: Cinnamon -->
+        <article class="project-card glass-card">
+          <div class="project-header">
+            <div class="project-pill">Internship Project</div>
+            <span class="project-year">2026</span>
+          </div>
+
+          <div class="project-content">
+            <div class="project-title-row">
+              <div class="project-icon-badge">🌿</div>
+              <div>
+                <h3 class="project-title">Cinnamon Quality Classification</h3>
+                <span class="project-type">Full Stack Machine Learning Web Application</span>
+              </div>
+            </div>
+
+            <p class="project-description">
+              An intelligent classification platform that determines the commercial grade (High, Medium, Low) of cinnamon samples based on laboratory chemical test parameters. Built during my internship using Django and machine learning pipelines.
+            </p>
+
+            <ul class="project-highlights">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Trained and benchmarked <strong>5 ML models</strong> with accuracy evaluation</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Automated preprocessing pipelines with saved scalers and encoders</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Secure role-based user authentication using Django Auth</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Comprehensive dataset sanitization with NumPy and Pandas</span>
+              </li>
+            </ul>
+
+            <div class="project-tech-tags">
+              <span>Python</span>
+              <span>Django</span>
+              <span>Scikit-Learn</span>
+              <span>NumPy</span>
+              <span>Pandas</span>
+              <span>HTML5/CSS3</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="#cinnamon" class="btn btn-sm btn-primary">
+                <span>Open ML Simulator</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://github.com/devikagorebal/-Cinnamon-Quality-Classifier" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <span>Source Code</span>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 Card: Nova -->
+        <article class="project-card glass-card">
+          <div class="project-header">
+            <div class="project-pill pill-violet">Autonomous System</div>
+            <!-- <span class="project-year">Feb – May 2026</span> -->
+          </div>
+
+          <div class="project-content">
+            <div class="project-title-row">
+              <div class="project-icon-badge badge-violet">🎙️</div>
+              <div>
+                <h3 class="project-title">Nova AI Voice Assistant</h3>
+                <span class="project-type">Python Speech Intelligence &amp; GUI Assistant</span>
+              </div>
+            </div>
+
+            <p class="project-description">
+              A responsive desktop voice assistant that listens to verbal natural language instructions, executes multi-threaded web &amp; desktop actions, and replies using synthesized audio with a dedicated GUI.
+            </p>
+
+            <ul class="project-highlights">
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Strict <strong>Object-Oriented Architecture</strong> separating voice, logic, and GUI</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Automated workflow triggers for web browsing, search, and OS shortcuts</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Low-latency speech-to-text recognition with voice response synthesis</span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Clean desktop interface designed for seamless everyday interaction</span>
+              </li>
+            </ul>
+
+            <div class="project-tech-tags">
+              <span>Python 3</span>
+              <span>OOP Architecture</span>
+              <span>SpeechRecognition</span>
+              <span>Pyttsx3</span>
+              <span>GUI Engineering</span>
+              <span>Threading</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="#nova" class="btn btn-sm btn-primary">
+                <span>Launch Mini Nova</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </a>
+              <a href="https://github.com/devikagorebal/Nova-Voice-Assistant" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-ghost">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <span>Source Code</span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CINNAMON SPOTLIGHT & INTERACTIVE ML LAB -->
+    <section id="cinnamon" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Interactive Showcase</span>
+        <h2 class="section-title">Spotlight: Cinnamon Quality Classification</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          Explore how chemical attributes (moisture, ash, coumarin, volatile oil) predict grade quality using 5 trained machine learning algorithms.
+        </p>
+      </div>
+
+      <!-- Architecture Pipeline Steps -->
+      <div class="pipeline-flow">
+        <div class="pipeline-step glass-card">
+          <div class="step-badge">1</div>
+          <div class="step-icon">🔐</div>
+          <h4>Auth &amp; Ingestion</h4>
+          <p>Secure Django authentication protects the clinical data ingestion forms.</p>
+        </div>
+        <div class="pipeline-step glass-card">
+          <div class="step-badge">2</div>
+          <div class="step-icon">⚗️</div>
+          <h4>Chemical Inputs</h4>
+          <p>Moisture, ash, volatile oil, acid insoluble ash, chromium, coumarin.</p>
+        </div>
+        <div class="pipeline-step glass-card">
+          <div class="step-badge">3</div>
+          <div class="step-icon">⚙️</div>
+          <h4>Preprocessing</h4>
+          <p>Serialised StandardScaler &amp; LabelEncoder transform raw measurements.</p>
+        </div>
+        <div class="pipeline-step glass-card">
+          <div class="step-badge">4</div>
+          <div class="step-icon">🏆</div>
+          <h4>Classify &amp; Vote</h4>
+          <p>Ensemble model ranking outputs High, Medium, or Low grade with metrics.</p>
+        </div>
+      </div>
+
+      <!-- Live Interactive ML Simulator Playground -->
+      <div class="ml-simulator-container glass-card">
+        <div class="simulator-header">
+          <div class="sim-title-group">
+            <span class="sim-badge">Interactive ML Simulator</span>
+            <h3>Test Chemical Values in Real Time</h3>
+          </div>
+          <button id="resetSimBtn" class="btn btn-sm btn-ghost">Reset to Defaults</button>
+        </div>
+
+        <div class="simulator-grid">
+          <!-- Parameter Sliders -->
+          <div class="simulator-inputs">
+            <!-- Moisture -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="sliderMoisture">Moisture Content</label>
+                <span class="slider-val" id="valMoisture">10.2%</span>
+              </div>
+              <input type="range" id="sliderMoisture" min="6.0" max="18.0" step="0.1" value="10.2">
+              <div class="slider-hints">
+                <span>Optimal: &lt; 12%</span>
+                <span>Max: 18%</span>
+              </div>
+            </div>
+
+            <!-- Volatile Oil -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="sliderOil">Volatile Oil</label>
+                <span class="slider-val" id="valOil">2.8 ml/100g</span>
+              </div>
+              <input type="range" id="sliderOil" min="0.5" max="4.5" step="0.1" value="2.8">
+              <div class="slider-hints">
+                <span>Min: 0.5</span>
+                <span>Premium: &gt; 2.5 ml</span>
+              </div>
+            </div>
+
+            <!-- Coumarin -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="sliderCoumarin">Coumarin (Safety Indicator)</label>
+                <span class="slider-val" id="valCoumarin">8.5 mg/kg</span>
+              </div>
+              <input type="range" id="sliderCoumarin" min="2" max="60" step="0.5" value="8.5">
+              <div class="slider-hints">
+                <span>Ceylon: &lt; 15 mg/kg</span>
+                <span>Cassia: &gt; 30 mg/kg</span>
+              </div>
+            </div>
+
+            <!-- Total Ash -->
+            <div class="slider-group">
+              <div class="slider-header">
+                <label for="sliderAsh">Total Ash</label>
+                <span class="slider-val" id="valAsh">4.1%</span>
+              </div>
+              <input type="range" id="sliderAsh" min="2.0" max="9.0" step="0.1" value="4.1">
+              <div class="slider-hints">
+                <span>Pure: 3.5% - 5.0%</span>
+                <span>Degraded: &gt; 6.5%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Output Panel -->
+          <div class="simulator-output">
+            <div class="prediction-card" id="predictionCard">
+              <span class="pred-label">Predicted Cinnamon Grade</span>
+              <div class="pred-result" id="predResult">HIGH QUALITY</div>
+              <p class="pred-explanation" id="predExplanation">
+                Low coumarin, optimal volatile oil, and balanced moisture align with premium Ceylon cinnamon standards.
+              </p>
+              <div class="confidence-meter">
+                <div class="conf-header">
+                  <span>Model Confidence</span>
+                  <span id="confValue">96.4%</span>
+                </div>
+                <div class="conf-bar-track">
+                  <div class="conf-bar-fill" id="confBar" style="width: 96.4%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mini Probability Breakdown -->
+            <div class="prob-breakdown">
+              <div class="prob-item">
+                <span>High Grade</span>
+                <span class="prob-score" id="probHigh">88%</span>
+              </div>
+              <div class="prob-item">
+                <span>Medium Grade</span>
+                <span class="prob-score" id="probMed">10%</span>
+              </div>
+              <div class="prob-item">
+                <span>Low Grade</span>
+                <span class="prob-score" id="probLow">2%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Models Compared Interactive Explorer -->
+      <div class="models-comparison-block">
+        <h3 class="comparison-title">The 5 Benchmarked Machine Learning Models</h3>
+        <p class="comparison-subtitle">Click on any algorithm to inspect how it processed the chemical sample data:</p>
+
+        <div class="model-chips" id="modelChips">
+          <button class="model-chip active" data-model="rf" data-accuracy="96.4%" data-name="Random Forest" data-desc="Ensemble of decision trees voting together. Mitigated overfitting, handled non-linear chemical interactions brilliantly, and achieved our highest accuracy score.">
+            <span class="chip-dot"></span>
+            <span>Random Forest (96.4%)</span>
+          </button>
+          <button class="model-chip" data-model="svm" data-accuracy="94.2%" data-name="Support Vector Machine (SVM)" data-desc="Constructed optimal hyperplanes in high-dimensional chemical feature space, maximizing margins between quality boundaries.">
+            <span class="chip-dot"></span>
+            <span>SVM (94.2%)</span>
+          </button>
+          <button class="model-chip" data-model="lr" data-accuracy="91.8%" data-name="Logistic Regression" data-desc="Calculated class probabilities using sigmoid decision boundaries. Provided clear interpretability for individual chemical feature weights.">
+            <span class="chip-dot"></span>
+            <span>Logistic Regression (91.8%)</span>
+          </button>
+          <button class="model-chip" data-model="knn" data-accuracy="89.5%" data-name="K-Nearest Neighbors (KNN)" data-desc="Classified samples based on Euclidean distance to nearest calibrated chemical benchmarks in feature space. Sensitive to feature scaling.">
+            <span class="chip-dot"></span>
+            <span>KNN (89.5%)</span>
+          </button>
+          <button class="model-chip" data-model="dt" data-accuracy="88.0%" data-name="Decision Tree" data-desc="Constructed sequential binary split criteria on thresholds like moisture and volatile oil. Easy to visualize but prone to high variance compared to Random Forest.">
+            <span class="chip-dot"></span>
+            <span>Decision Tree (88.0%)</span>
+          </button>
+        </div>
+
+        <div class="model-inspector glass-card" id="modelInspector">
+          <div class="inspector-header">
+            <div>
+              <h4 id="inspectorName">Random Forest</h4>
+              <span class="inspector-badge" id="inspectorAcc">Accuracy: 96.4% • Best Performing</span>
+            </div>
+            <div class="inspector-icon">🌲</div>
+          </div>
+          <p id="inspectorDesc">
+            Ensemble of decision trees voting together. Mitigated overfitting, handled non-linear chemical interactions brilliantly, and achieved our highest accuracy score.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI NOVA INTERACTIVE VOICE/TERMINAL -->
+    <section id="nova" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Interactive Assistant</span>
+        <h2 class="section-title">Talk to Mini Nova</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          An interactive web reproduction of my desktop AI voice assistant. Ask questions about my background, skills, projects, or request voice replies!
+        </p>
+      </div>
+
+      <div class="nova-terminal-shell glass-card">
+        <!-- Terminal Top Bar -->
+        <div class="terminal-bar">
+          <div class="terminal-dots">
+            <span class="tdot red"></span>
+            <span class="tdot yellow"></span>
+            <span class="tdot green"></span>
+          </div>
+          <div class="terminal-identity">
+            <span class="terminal-pulse"></span>
+            <span>nova-assistant // v2.6.4</span>
+          </div>
+          <div class="terminal-controls">
+            <label class="voice-toggle-label" title="Enable text-to-speech voice replies">
+              <input type="checkbox" id="voiceToggle">
+              <span class="voice-toggle-slider"></span>
+              <span class="voice-toggle-text">Voice Reply</span>
+            </label>
+            <button class="terminal-clear-btn" id="clearTerminalBtn" title="Clear log">Clear</button>
+          </div>
+        </div>
+
+        <!-- Audio Wave Visualizer Animation -->
+        <div class="audio-wave-container" id="audioWave" aria-hidden="true">
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+        </div>
+
+        <!-- Terminal Chat Log -->
+        <div class="terminal-log" id="terminalLog">
+          <div class="terminal-msg nova-msg">
+            <span class="msg-sender">Nova:</span>
+            <div class="msg-content">
+              Hello! I'm Nova, Devika's AI assistant. Try asking me anything about Devika's work, or click the quick prompt pills below!
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Question Chips -->
+        <div class="terminal-suggestions">
+          <span class="sugg-label">Try asking:</span>
+          <button class="sugg-chip" data-query="skills">skills</button>
+          <button class="sugg-chip" data-query="projects">projects</button>
+          <button class="sugg-chip" data-query="education">education</button>
+          <button class="sugg-chip" data-query="cgpa">cgpa</button>
+          <button class="sugg-chip" data-query="cinnamon">cinnamon app</button>
+          <button class="sugg-chip" data-query="contact">contact</button>
+          <button class="sugg-chip" data-query="hire">hire devika</button>
+        </div>
+
+        <!-- Input Bar -->
+        <form class="terminal-input-row" id="terminalForm">
+          <span class="terminal-input-prompt">&gt;</span>
+          <input type="text" id="terminalInput" class="terminal-input" placeholder="Type a command or question (e.g., 'skills', 'projects', 'contact')..." autocomplete="off">
+          <button type="submit" class="terminal-send-btn" id="sendBtn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- JOURNEY & TIMELINE -->
+    <section id="journey" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Career Milestones</span>
+        <h2 class="section-title">My Journey &amp; Education</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">Academic rigor, specialized certifications, and practical engineering milestones.</p>
+      </div>
+
+      <div class="timeline-container">
+        <!-- Item 1 -->
+        <!-- <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <span class="timeline-date">Feb – May 2026</span>
+              <span class="timeline-tag">AI Engineering</span>
+            </div>
+            <h3>Nova AI Voice Assistant</h3>
+            <p>
+              Designed and engineered a modular desktop assistant in Python with speech recognition, text-to-speech audio pipelines, system automation scripts, and an intuitive GUI.
+            </p>
+          </div>
+        </div> -->
+
+        <!-- Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <span class="timeline-date">2026</span>
+              <span class="timeline-tag">Internship</span>
+            </div>
+            <h3>Full Stack Development Internship</h3>
+            <p>
+              Spearheaded the Cinnamon Quality Classification web application: constructed data preprocessing flows, benchmarked 5 scikit-learn models, and integrated predictions into a Django authenticated web app.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <span class="timeline-date">2026</span>
+              <span class="timeline-tag">Course</span>
+            </div>
+            <h3>Python Full Stack Developer </h3>
+            <p>
+              <strong>Destination Career:</strong> Intensive training encompassing core Python, Object-Oriented design, Django backend architecture, relational database schemas (MySQL &amp; Oracle), and REST APIs.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <span class="timeline-date">Dec 2022 – May 2026</span>
+              <span class="timeline-tag">Undergraduate</span>
+            </div>
+            <h3>BE in Computer Science &amp; Engineering</h3>
+            <p>
+              <strong>Sampoorna Institute of Technology and Research</strong><br>
+              Maintained an outstanding cumulative grade point average of <strong>8.66 CGPA</strong>, excelling in algorithms, database management, software engineering, and web development.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-card glass-card">
+            <div class="timeline-header">
+              <span class="timeline-date">Class 6 – 12</span>
+              <span class="timeline-tag">Schooling</span>
+            </div>
+            <h3>Jawahar Navodaya Vidyalaya, Mandya</h3>
+            <p>
+              Completed secondary and higher secondary education with <strong>85%</strong>. Nurtured analytical problem-solving, science foundations, and early programming interest.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section reveal">
+      <div class="section-header">
+        <span class="section-tag">Let's Connect</span>
+        <h2 class="section-title">Ready to Create Something Amazing?</h2>
+        <div class="title-underline"></div>
+        <p class="section-subtitle">
+          I am actively looking for full-time entry-level Full Stack Developer opportunities in Bengaluru or remote. Feel free to reach out!
+        </p>
+      </div>
+
+      <div class="contact-card-wrapper glass-card">
+        <div class="contact-cta-block">
+          <div class="contact-avatar-badge">👩‍💻</div>
+          <h3>Let's build great software together</h3>
+          <p>
+            Whether you have an opening on your engineering team, a project idea, or just want to chat about Python, Django, or ML pipelines, my inbox is always open.
+          </p>
+
+          <div class="contact-buttons-row">
+            <!-- Email Direct Button -->
+            <a href="mailto:devikagorebalc@gmail.com" class="btn btn-primary magnetic-btn" id="emailDirectBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>devikagorebalc@gmail.com</span>
+            </a>
+
+            <!-- Copy Email Button -->
+            <button class="btn btn-secondary copy-email-btn" data-email="devikagorebalc@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copy Address</span>
+            </button>
+          </div>
+
+          <!-- Social Links Grid -->
+          <div class="contact-social-grid">
+            <a href="https://linkedin.com/in/g-devika-36488130a" target="_blank" rel="noopener noreferrer" class="contact-social-card">
+              <div class="social-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+              </div>
+              <div class="social-info">
+                <span class="social-title">LinkedIn</span>
+                <span class="social-sub">Connect with G Devika</span>
+              </div>
+              <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+
+            <a href="https://github.com/your-username" target="_blank" rel="noopener noreferrer" class="contact-social-card">
+              <div class="social-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </div>
+              <div class="social-info">
+                <span class="social-title">GitHub</span>
+                <span class="social-sub">Explore repositories</span>
+              </div>
+              <svg class="external-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-branding">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-bracket">&lt;</span>
+          <span class="logo-name">Devika</span>
+          <span class="logo-bracket">/&gt;</span>
+        </a>
+        <p class="footer-tagline">Crafting scalable full-stack applications with curiosity &amp; precision.</p>
+      </div>
+
+      <div class="footer-status">
+        <div class="footer-time-badge">
+          <span class="time-dot"></span>
+          <span>Bengaluru, India: </span>
+          <strong id="liveClock">--:--:--</strong>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 G Devika. All rights reserved.</p>
+        <button id="backToTop" class="back-to-top" title="Back to top" aria-label="Back to top">
+          <span>Top</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
